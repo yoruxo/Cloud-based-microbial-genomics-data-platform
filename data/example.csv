@@ -1,0 +1,6 @@
+sample_id,taxon,read_count,gc_content
+sample-001,Escherichia coli,125000,50.8
+sample-002,Escherichia coli,138500,51.1
+sample-003,Bacillus subtilis,98000,43.7
+sample-004,Bacillus subtilis,102500,43.9
+sample-005,Pseudomonas aeruginosa,117000,66.2
