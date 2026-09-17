@@ -1,0 +1,26 @@
+services:
+  localstack:
+    image: localstack/localstack:3.7
+    container_name: microbial-localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      SERVICES: "s3,lambda,apigateway,dynamodb,iam,logs"
+      DEBUG: "1"
+      DATA_DIR: "/var/lib/localstack/data"
+      DEFAULT_REGION: "us-east-1"
+      AWS_DEFAULT_REGION: "us-east-1"
+      HOSTNAME_EXTERNAL: "localhost"
+      LAMBDA_EXECUTOR: "local"
+      LOCALSTACK_HOST: "localhost"
+    volumes:
+      - ".:/opt/project"
+      - "./localstack/init:/etc/localstack/init/ready.d"
+      - "./.localstack:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
